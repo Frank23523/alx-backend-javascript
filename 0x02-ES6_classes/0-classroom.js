@@ -7,6 +7,7 @@ export default class ClassRoom {
    * @param {Number} maxStudentsSize - The maximum number of
    * students in the class.
    */
+  /* eslint-disable-next-line no-underscore-dangle */
   constructor(maxStudentsSize) {
     this._maxStudentsSize = maxStudentsSize;
   }
