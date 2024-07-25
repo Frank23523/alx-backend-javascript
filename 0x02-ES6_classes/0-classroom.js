@@ -1,13 +1,16 @@
 /**
- * Represents a class room.
+ * Class representing a classroom.
  */
 export default class ClassRoom {
   /**
-   * Creates a new @see {@link ClassRoom}.
-   * @param {Number} maxStudentsSize - The maximum number of
-   * students in the class.
+   * Create a classroom.
+   * @param {number} maxStudentsSize - The maximum number of students in the classroom.
    */
   constructor(maxStudentsSize) {
+    /**
+     * @type {number}
+     * @private
+     */
     this._maxStudentsSize = maxStudentsSize;
   }
 }
