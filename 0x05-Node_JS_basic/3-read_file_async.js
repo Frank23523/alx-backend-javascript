@@ -1,11 +1,11 @@
 // read the database file asynchronously and return a Promise
-const fs = require("fs").promises;
+const fs = require('fs').promises;
 
 function countStudents(path) {
   return new Promise((resolve, reject) => {
-    fs.readFile(path, "utf8")
+    fs.readFile(path, 'utf8')
       .then((data) => {
-        const lines = data.split("\n").filter((line) => line.trim() !== "");
+        const lines = data.split('\n').filter((line) => line.trim() !== '');
         const students = lines.slice(1);
 
         console.log(`Number of students: ${students.length}`);
@@ -13,7 +13,7 @@ function countStudents(path) {
         const studentsByField = {};
 
         students.forEach((student) => {
-          const [firstName, , , field] = student.split(",");
+          const [firstName, , , field] = student.split(',');
           if (!studentsByField[field]) {
             studentsByField[field] = [];
           }
@@ -24,14 +24,14 @@ function countStudents(path) {
           console.log(
             `Number of students in ${field}: ${
               students.length
-            }. List: ${students.join(", ")}`
+            }. List: ${students.join(', ')}`,
           );
         }
 
         resolve();
       })
       .catch(() => {
-        reject(new Error("Cannot load the database"));
+        reject(new Error('Cannot load the database'));
       });
   });
 }
