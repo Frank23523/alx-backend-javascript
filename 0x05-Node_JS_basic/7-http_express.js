@@ -1,14 +1,14 @@
 // recreation of a small HTTP server using Express
-const express = require("express");
-const fs = require("fs").promises;
+const express = require('express');
+const fs = require('fs').promises;
 
 const app = express();
 const port = 1245;
 
 async function countStudents(path) {
   try {
-    const data = await fs.readFile(path, "utf8");
-    const lines = data.split("\n").filter((line) => line.trim() !== "");
+    const data = await fs.readFile(path, 'utf8');
+    const lines = data.split('\n').filter((line) => line.trim() !== '');
     const students = lines.slice(1);
 
     let output = `Number of students: ${students.length}\n`;
@@ -16,7 +16,7 @@ async function countStudents(path) {
     const studentsByField = {};
 
     students.forEach((student) => {
-      const [firstName, , , field] = student.split(",");
+      const [firstName, , , field] = student.split(',');
       if (!studentsByField[field]) {
         studentsByField[field] = [];
       }
@@ -26,26 +26,26 @@ async function countStudents(path) {
     for (const [field, fieldStudents] of Object.entries(studentsByField)) {
       output += `Number of students in ${field}: ${
         fieldStudents.length
-      }. List: ${fieldStudents.join(", ")}\n`;
+      }. List: ${fieldStudents.join(', ')}\n`;
     }
 
     return output;
   } catch (error) {
-    throw new Error("Cannot load the database");
+    throw new Error('Cannot load the database');
   }
 }
 
-app.get("/", (req, res) => {
-  res.send("Hello Holberton School!");
+app.get('/', (req, res) => {
+  res.send('Hello Holberton School!');
 });
 
-app.get("/students", async (req, res) => {
+app.get('/students', async (req, res) => {
   try {
     const databasePath = process.argv[2];
     const studentsInfo = await countStudents(databasePath);
-    res.send("This is the list of our students\n" + studentsInfo);
+    res.send('This is the list of our students\n' + studentsInfo);
   } catch (error) {
-    res.status(500).send("Cannot load the database");
+    res.status(500).send('Cannot load the database');
   }
 });
 
