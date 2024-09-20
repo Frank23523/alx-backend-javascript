@@ -1,14 +1,14 @@
 // small HTTP server
-const http = require("http");
-const fs = require("fs").promises;
+const http = require('http');
+const fs = require('fs').promises;
 
 const port = 1245;
-const host = "localhost";
+const host = 'localhost';
 
 async function countStudents(path) {
   try {
-    const data = await fs.readFile(path, "utf8");
-    const lines = data.split("\n").filter((line) => line.trim() !== "");
+    const data = await fs.readFile(path, 'utf8');
+    const lines = data.split('\n').filter((line) => line.trim() !== '');
     const students = lines.slice(1);
 
     let output = `Number of students: ${students.length}\n`;
@@ -16,7 +16,7 @@ async function countStudents(path) {
     const studentsByField = {};
 
     students.forEach((student) => {
-      const [firstName, , , field] = student.split(",");
+      const [firstName, , , field] = student.split(',');
       if (!studentsByField[field]) {
         studentsByField[field] = [];
       }
@@ -26,24 +26,24 @@ async function countStudents(path) {
     for (const [field, fieldStudents] of Object.entries(studentsByField)) {
       output += `Number of students in ${field}: ${
         fieldStudents.length
-      }. List: ${fieldStudents.join(", ")}\n`;
+      }. List: ${fieldStudents.join(', ')}\n`;
     }
 
     return output;
   } catch (error) {
-    throw new Error("Cannot load the database");
+    throw new Error('Cannot load the database');
   }
 }
 
 const app = http.createServer(async (req, res) => {
-  res.setHeader("Content-Type", "text/plain");
+  res.setHeader('Content-Type', 'text/plain');
 
-  if (req.url === "/") {
+  if (req.url === '/') {
     res.statusCode = 200;
-    res.end("Hello Holberton School!");
-  } else if (req.url === "/students") {
+    res.end('Hello Holberton School!');
+  } else if (req.url === '/students') {
     res.statusCode = 200;
-    res.write("This is the list of our students\n");
+    res.write('This is the list of our students\n');
     try {
       const studentsInfo = await countStudents(process.argv[2]);
       res.end(studentsInfo);
@@ -52,7 +52,7 @@ const app = http.createServer(async (req, res) => {
     }
   } else {
     res.statusCode = 404;
-    res.end("Not found");
+    res.end('Not found');
   }
 });
 
