@@ -2,14 +2,12 @@
   "name": "0x06-unittests_in_js",
   "version": "1.0.0",
   "description": "Unittests in JS",
-  "main": "0-calcul.js",
+  "main": "2-calcul_chai.js",
   "scripts": {
     "test": "mocha"
   },
   "devDependencies": {
-    "mocha": "^7.2.0"
-  },
-  "dependencies": {
-    "chai": "^5.1.1"
+    "mocha": "^7.2.0",
+    "chai": "^4.2.0"
   }
 }
