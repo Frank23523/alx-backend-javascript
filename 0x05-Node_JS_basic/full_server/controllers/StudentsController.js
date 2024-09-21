@@ -5,9 +5,7 @@ class StudentsController {
     readDatabase(process.argv[2])
       .then((studentsByField) => {
         let output = 'This is the list of our students\n';
-        const sortedFields = Object.keys(studentsByField).sort((a, b) =>
-          a.localeCompare(b, undefined, { sensitivity: 'base' }),
-        );
+        const sortedFields = Object.keys(studentsByField).sort((a, b) => a.localeCompare((b, undefined, { sensitivity: 'base' })));
 
         sortedFields.forEach((field) => {
           output += `Number of students in ${field}: ${
