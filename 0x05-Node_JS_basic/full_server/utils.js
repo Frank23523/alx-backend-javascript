@@ -1,15 +1,15 @@
-const fs = require("fs").promises;
+const fs = require('fs').promises;
 
 const readDatabase = async (filePath) => {
   try {
-    const data = await fs.readFile(filePath, "utf8");
-    const lines = data.split("\n").filter((line) => line.trim() !== "");
+    const data = await fs.readFile(filePath, 'utf8');
+    const lines = data.split('\n').filter((line) => line.trim() !== '');
     const students = lines.slice(1);
 
     const studentsByField = {};
 
     students.forEach((student) => {
-      const [firstName, , , field] = student.split(",");
+      const [firstName, , , field] = student.split(',');
       if (!studentsByField[field]) {
         studentsByField[field] = [];
       }
@@ -18,7 +18,7 @@ const readDatabase = async (filePath) => {
 
     return studentsByField;
   } catch (error) {
-    throw new Error("Cannot load the database");
+    throw new Error('Cannot load the database');
   }
 };
 
